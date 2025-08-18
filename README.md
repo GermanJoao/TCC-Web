@@ -1,4 +1,4 @@
-# 📄 Beelder
+# 🐝 Beelder
 
 Um projeto web simples e autossuficiente para criação, gerenciamento e exportação de currículos.  
 O sistema utiliza **localStorage** para salvar os dados localmente, sem depender de banco de dados externo.  
