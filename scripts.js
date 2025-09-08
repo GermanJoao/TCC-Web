@@ -7,20 +7,65 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("formCurriculo");
 
     function carregarCurriculos() {
-        lista.innerHTML = "";
-        const curriculos = JSON.parse(localStorage.getItem("curriculos") || "[]");
-        curriculos.forEach((c, i) => {
-            const div = document.createElement("div");
-            div.innerHTML = `
-                <strong>${c.nome}</strong><br>
-                ${c.email} | ${c.telefone}<br>
-                <button onclick="editarCurriculo(${i})">Editar</button>
-                <button onclick="excluirCurriculo(${i})">Excluir</button>
-                <button onclick="exportarPDF(${i})">Exportar PDF</button>
-            `;
-            lista.appendChild(div);
-        });
+    lista.innerHTML = "";
+    const curriculos = JSON.parse(localStorage.getItem("curriculos") || "[]");
+
+    if (curriculos.length === 0) {
+        lista.innerHTML = `
+            <div class="vazio">
+                <img src="abelha.png" alt="Abelha" class="abelha">
+                <p>Não tem nada aqui ainda.</p>
+            </div>
+        `;
+        return;
     }
+
+    curriculos.forEach((c, i) => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        card.innerHTML = `
+            <div class="card-header">
+                <img src="abelha.png" alt="Foto">
+                <div>
+                    <h3>${c.nome}</h3>
+                    <span>${c.email} | ${c.telefone}</span>
+                </div>
+            </div>
+            <div class="card-info">
+                <strong>Resumo:</strong> ${c.resumo || "—"}
+            </div>
+            <div class="card-info extra" style="display:none;">
+                <p><strong>Experiência:</strong> ${c.experiencia || "—"}</p>
+                <p><strong>Habilidades:</strong> ${c.habilidades || "—"}</p>
+            </div>
+            <div class="toggle-btn">▼ Ver mais</div>
+            <button class="edit-btn" onclick="editarCurriculo(${i})">Editar</button>
+            <div style="margin-top:10px; display:flex; gap:8px; justify-content:flex-end;">
+                <button class="btn cancelar" onclick="excluirCurriculo(${i})">Excluir</button>
+                <button class="btn salvar" onclick="exportarPDF(${i})">Exportar</button>
+            </div>
+        `;
+
+        // toggle de expandir
+        const toggle = card.querySelector(".toggle-btn");
+        const extra = card.querySelector(".extra");
+        toggle.addEventListener("click", () => {
+            if (extra.style.display === "none") {
+                extra.style.display = "block";
+                toggle.textContent = "▲ Ver menos";
+                card.classList.add("expandido");
+            } else {
+                extra.style.display = "none";
+                toggle.textContent = "▼ Ver mais";
+                card.classList.remove("expandido");
+            }
+        });
+
+        lista.appendChild(card);
+    });
+}
+
 
     btnNovo.addEventListener("click", () => {
         document.getElementById("curriculoId").value = "";

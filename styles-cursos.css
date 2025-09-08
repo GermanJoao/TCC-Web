@@ -1,0 +1,277 @@
+/* Variáveis de cores */
+:root {
+  --text: #eae9fc;
+  --background: #010104;
+  --primary: #ffbb00;
+  --secondary: #daa7f6;
+  --accent: #ff8400;
+  --line: #535353;
+}
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #000;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.logo-img {
+  width: 32px;
+  margin-right: 10px;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.menu li a {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--text);
+  transition: 0.3s;
+}
+
+.menu li a.ativo {
+  color: var(--primary);
+}
+
+.menu li a:hover {
+  color: var(--secondary);
+}
+
+/* CONTEÚDO */
+main {
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: var(--primary);
+}
+
+/* ÁREA DE CURRÍCULOS */
+.curriculos-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.vazio {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.vazio img.abelha {
+  width: 120px;
+  opacity: 0.8;
+}
+
+.vazio p {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  color: var(--secondary);
+}
+
+/* BOTÃO FLUTUANTE */
+.botao-flutuante {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  border: none;
+  border-radius: 50%;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  transition: transform 0.2s ease;
+}
+
+.botao-flutuante:hover {
+  transform: scale(1.1);
+}
+
+/* MODAL */
+.modal {
+  display: none; /* fica escondido até abrir */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: #111;
+  padding: 20px;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 0 10px var(--secondary);
+  color: var(--text);
+  text-align: left;
+}
+
+.modal h2 {
+  margin-bottom: 15px;
+  color: var(--secondary);
+}
+
+.modal label {
+  font-weight: bold;
+  color: var(--secondary);
+}
+
+.modal input,
+.modal textarea {
+  width: 100%;
+  margin: 5px 0 15px;
+  padding: 8px;
+  border: 1px solid var(--secondary);
+  border-radius: 6px;
+  background: #000;
+  color: var(--text);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn.salvar {
+  background: var(--primary);
+  color: #000;
+}
+
+.btn.cancelar {
+  background: #444;
+  color: var(--text);
+}
+
+.btn.salvar:hover {
+  background: var(--accent);
+}
+
+.btn.cancelar:hover {
+  background: #666;
+}
+/* CARDS DE CURRÍCULO */
+.card {
+  background: #111;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 15px;
+  width: 280px;
+  color: var(--text);
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  transition: 0.3s;
+  position: relative;
+}
+
+.card:hover {
+  border-color: var(--secondary);
+  transform: scale(1.02);
+}
+
+.card img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.card-header h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: var(--text);
+}
+
+.card-header span {
+  font-size: 0.9rem;
+  color: var(--secondary);
+}
+
+.card-info {
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+.card-info strong {
+  color: var(--secondary);
+}
+
+.toggle-btn {
+  text-align: center;
+  margin-top: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+.card.expandido {
+  width: 320px;
+}
+
+.card.expandido .extra {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.edit-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--accent);
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
