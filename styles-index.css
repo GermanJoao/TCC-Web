@@ -77,6 +77,7 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+  width: 50%;;
 }
 
 .vazio {
