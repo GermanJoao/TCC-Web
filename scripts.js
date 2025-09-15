@@ -2,110 +2,106 @@ const { jsPDF } = window.jspdf;
 
 document.addEventListener("DOMContentLoaded", () => {
     const lista = document.getElementById("curriculos");
-    const btnNovo = document.getElementById("novoCurriculo");
-    const modal = document.getElementById("modal");
-    const form = document.getElementById("formCurriculo");
 
     function carregarCurriculos() {
-    lista.innerHTML = "";
-    const curriculos = JSON.parse(localStorage.getItem("curriculos") || "[]");
+        lista.innerHTML = "";
+        const curriculos = JSON.parse(localStorage.getItem("curriculos") || "[]");
 
-    if (curriculos.length === 0) {
-        lista.innerHTML = `
-            <div class="vazio">
-                <img src="abelha.png" alt="Abelha" class="abelha">
-                <p>Não tem nada aqui ainda.</p>
-            </div>
-        `;
-        return;
-    }
-
-    curriculos.forEach((c, i) => {
-        const card = document.createElement("div");
-        card.classList.add("card");
-
-        card.innerHTML = `
-            <div class="card-header">
-                <img src="abelha.png" alt="Foto">
-                <div>
-                    <h3>${c.nome}</h3>
-                    <span>${c.email} | ${c.telefone}</span>
+        if (curriculos.length === 0) {
+            lista.innerHTML = `
+                <div class="vazio">
+                    <img src="abelha.png" alt="Abelha" class="abelha">
+                    <p>Não tem nada aqui ainda.</p>
                 </div>
-            </div>
-            <div class="card-info">
-                <strong>Resumo:</strong> ${c.resumo || "—"}
-            </div>
-            <div class="card-info extra" style="display:none;">
-                <p><strong>Experiência:</strong> ${c.experiencia || "—"}</p>
-                <p><strong>Habilidades:</strong> ${c.habilidades || "—"}</p>
-            </div>
-            <div class="toggle-btn">▼ Ver mais</div>
-            <button class="edit-btn" onclick="editarCurriculo(${i})">Editar</button>
-            <div style="margin-top:10px; display:flex; gap:8px; justify-content:flex-end;">
-                <button class="btn cancelar" onclick="excluirCurriculo(${i})">Excluir</button>
-                <button class="btn salvar" onclick="exportarPDF(${i})">Exportar</button>
-            </div>
-        `;
+                <button id="btnAdicionar" class="btn">+ Novo Currículo</button>
+            `;
+            document.getElementById("btnAdicionar").addEventListener("click", novoCurriculo);
+            return;
+        }
 
-        // toggle de expandir
-        const toggle = card.querySelector(".toggle-btn");
-        const extra = card.querySelector(".extra");
-        toggle.addEventListener("click", () => {
-            if (extra.style.display === "none") {
-                extra.style.display = "block";
-                toggle.textContent = "▲ Ver menos";
-                card.classList.add("expandido");
-            } else {
-                extra.style.display = "none";
-                toggle.textContent = "▼ Ver mais";
-                card.classList.remove("expandido");
-            }
+        curriculos.forEach((c, i) => {
+            const card = document.createElement("div");
+            card.classList.add("card");
+
+            card.innerHTML = `
+                <div class="card-header">
+                    <img src="abelha.png" alt="Foto">
+                    <div>
+                        <h3>${c.nome}</h3>
+                        <span>${c.email} | ${c.telefone}</span>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <strong>Resumo:</strong> ${c.resumo || "—"}
+                </div>
+                <div class="card-info extra" style="display:none;">
+                    <p><strong>Experiência:</strong> ${c.experiencia || "—"}</p>
+                    <p><strong>Habilidades:</strong> ${c.habilidades || "—"}</p>
+                </div>
+                <div class="toggle-btn">▼ Ver mais</div>
+                <button class="edit-btn" onclick="editarCurriculo(${i})">Editar</button>
+                <div style="margin-top:10px; display:flex; gap:8px; justify-content:flex-end;">
+                    <button class="btn cancelar" onclick="excluirCurriculo(${i})">Excluir</button>
+                    <button class="btn salvar" onclick="exportarPDF(${i})">Exportar</button>
+                </div>
+            `;
+
+            // toggle de expandir
+            const toggle = card.querySelector(".toggle-btn");
+            const extra = card.querySelector(".extra");
+            toggle.addEventListener("click", () => {
+                if (extra.style.display === "none") {
+                    extra.style.display = "block";
+                    toggle.textContent = "▲ Ver menos";
+                    card.classList.add("expandido");
+                } else {
+                    extra.style.display = "none";
+                    toggle.textContent = "▼ Ver mais";
+                    card.classList.remove("expandido");
+                }
+            });
+
+            lista.appendChild(card);
         });
 
-        lista.appendChild(card);
-    });
-}
+        // botão de adicionar currículo sempre aparece no fim
+        const btn = document.createElement("button");
+        btn.textContent = "+ Novo Currículo";
+        btn.className = "btn";
+        btn.addEventListener("click", novoCurriculo);
+        lista.appendChild(btn);
+    }
 
+    function novoCurriculo() {
+        const nome = prompt("Digite o nome:");
+        const email = prompt("Digite o email:");
+        const telefone = prompt("Digite o telefone:");
+        const resumo = prompt("Digite um resumo:");
+        const experiencia = prompt("Digite a experiência:");
+        const habilidades = prompt("Digite as habilidades:");
 
-    btnNovo.addEventListener("click", () => {
-        document.getElementById("curriculoId").value = "";
-        form.reset();
-        modal.style.display = "block";
-    });
+        if (!nome) return;
 
-    form.addEventListener("submit", e => {
-        e.preventDefault();
         const curriculos = JSON.parse(localStorage.getItem("curriculos") || "[]");
-        const id = document.getElementById("curriculoId").value;
-        const novo = {
-            nome: document.getElementById("nome").value,
-            email: document.getElementById("email").value,
-            telefone: document.getElementById("telefone").value,
-            resumo: document.getElementById("resumo").value,
-            experiencia: document.getElementById("experiencia").value,
-            habilidades: document.getElementById("habilidades").value,
-        };
-        if (id === "") {
-            curriculos.push(novo);
-        } else {
-            curriculos[id] = novo;
-        }
+        curriculos.push({ nome, email, telefone, resumo, experiencia, habilidades });
         localStorage.setItem("curriculos", JSON.stringify(curriculos));
-        fecharModal();
         carregarCurriculos();
-    });
+    }
 
     window.editarCurriculo = function (id) {
         const curriculos = JSON.parse(localStorage.getItem("curriculos") || "[]");
         const c = curriculos[id];
-        document.getElementById("curriculoId").value = id;
-        document.getElementById("nome").value = c.nome;
-        document.getElementById("email").value = c.email;
-        document.getElementById("telefone").value = c.telefone;
-        document.getElementById("resumo").value = c.resumo;
-        document.getElementById("experiencia").value = c.experiencia;
-        document.getElementById("habilidades").value = c.habilidades;
-        modal.style.display = "block";
+
+        const nome = prompt("Nome:", c.nome);
+        const email = prompt("Email:", c.email);
+        const telefone = prompt("Telefone:", c.telefone);
+        const resumo = prompt("Resumo:", c.resumo);
+        const experiencia = prompt("Experiência:", c.experiencia);
+        const habilidades = prompt("Habilidades:", c.habilidades);
+
+        curriculos[id] = { nome, email, telefone, resumo, experiencia, habilidades };
+        localStorage.setItem("curriculos", JSON.stringify(curriculos));
+        carregarCurriculos();
     };
 
     window.excluirCurriculo = function (id) {
@@ -130,7 +126,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
     carregarCurriculos();
 });
-
-function fecharModal() {
-    document.getElementById("modal").style.display = "none";
-}
