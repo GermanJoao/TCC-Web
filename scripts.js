@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
             lista.innerHTML = `
                 <div class="vazio">
                     <img src="abelha.png" alt="Abelha" class="abelha">
-                    <p>Não tem nada aqui ainda.</p>
                 </div>
             `;
             return;
