@@ -1,4 +1,4 @@
-/* Variáveis de cores */
+/* VARIÁVEIS */
 :root {
   --text: #eae9fc;
   --background: #010104;
@@ -8,7 +8,7 @@
   --line: #535353;
 }
 
-/* Reset básico */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -59,219 +59,84 @@ body {
   color: var(--secondary);
 }
 
-/* CONTEÚDO */
-main {
-  padding: 20px;
-  text-align: center;
+/* CONTEÚDO PRINCIPAL */
+main.conteudo {
+  padding: 30px;
+  max-width: 900px;
+  margin: auto;
 }
 
 h1 {
   margin-bottom: 20px;
-  font-size: 2rem;
+  font-size: 2.2rem;
+  text-align: center;
   color: var(--primary);
 }
 
-/* ÁREA DE CURRÍCULOS */
-.curriculos-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.vazio {
+.intro {
   text-align: center;
-  margin-top: 50px;
-}
-
-.vazio img.abelha {
-  width: 120px;
-  opacity: 0.8;
-}
-
-.vazio p {
-  margin-top: 10px;
   font-size: 1.1rem;
+  margin-bottom: 40px;
   color: var(--secondary);
 }
 
-/* BOTÃO FLUTUANTE */
-.botao-flutuante {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  border: none;
-  border-radius: 50%;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #000;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-  transition: transform 0.2s ease;
-}
-
-.botao-flutuante:hover {
-  transform: scale(1.1);
-}
-
-/* MODAL */
-.modal {
-  display: none; /* fica escondido até abrir */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-content {
+/* SEÇÕES DE DICAS */
+.dica {
   background: #111;
+  border: 1px solid var(--line);
+  border-radius: 12px;
   padding: 20px;
-  border-radius: 12px;
-  width: 400px;
-  max-width: 90%;
-  box-shadow: 0 0 10px var(--secondary);
-  color: var(--text);
-  text-align: left;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  transition: transform 0.2s ease, border-color 0.3s;
 }
 
-.modal h2 {
-  margin-bottom: 15px;
-  color: var(--secondary);
-}
-
-.modal label {
-  font-weight: bold;
-  color: var(--secondary);
-}
-
-.modal input,
-.modal textarea {
-  width: 100%;
-  margin: 5px 0 15px;
-  padding: 8px;
-  border: 1px solid var(--secondary);
-  border-radius: 6px;
-  background: #000;
-  color: var(--text);
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-.btn {
-  padding: 8px 14px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.btn.salvar {
-  background: var(--primary);
-  color: #000;
-}
-
-.btn.cancelar {
-  background: #444;
-  color: var(--text);
-}
-
-.btn.salvar:hover {
-  background: var(--accent);
-}
-
-.btn.cancelar:hover {
-  background: #666;
-}
-/* CARDS DE CURRÍCULO */
-.card {
-  background: #111;
-  border: 2px solid transparent;
-  border-radius: 12px;
-  padding: 15px;
-  width: 280px;
-  color: var(--text);
-  text-align: left;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  transition: 0.3s;
-  position: relative;
-}
-
-.card:hover {
+.dica:hover {
   border-color: var(--secondary);
   transform: scale(1.02);
 }
 
-.card img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
-}
-
-.card-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.card-header h3 {
-  font-size: 1.2rem;
-  margin: 0;
-  color: var(--text);
-}
-
-.card-header span {
-  font-size: 0.9rem;
+.dica h2 {
+  font-size: 1.5rem;
   color: var(--secondary);
+  margin-bottom: 15px;
 }
 
-.card-info {
-  font-size: 0.9rem;
-  margin-top: 8px;
+.dica ul {
+  text-align: left;
+  margin-bottom: 15px;
 }
 
-.card-info strong {
-  color: var(--secondary);
+.dica ul li {
+  margin-bottom: 8px;
+  font-size: 1rem;
 }
 
-.toggle-btn {
-  text-align: center;
-  margin-top: 8px;
-  cursor: pointer;
-  font-size: 1.2rem;
-  color: var(--primary);
+.dica img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  margin: 15px auto;
+  display: block;
 }
 
-.card.expandido {
-  width: 320px;
+.dica iframe {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 12px;
+  margin: 15px auto;
+  display: block;
 }
 
-.card.expandido .extra {
+.dica a {
+  display: inline-block;
   margin-top: 10px;
-  font-size: 0.9rem;
-  color: var(--text);
+  font-weight: bold;
+  color: var(--primary);
+  text-decoration: none;
+  transition: 0.3s;
 }
 
-.edit-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: var(--accent);
-  border: none;
-  padding: 6px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
+.dica a:hover {
+  color: var(--accent);
 }

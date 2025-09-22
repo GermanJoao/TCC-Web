@@ -35,6 +35,7 @@ body {
 .logo-img {
   width: 32px;
   margin-right: 10px;
+  
 }
 
 .menu {
@@ -86,11 +87,13 @@ h1 {
 
 .vazio img.abelha {
   width: 120px;
-  opacity: 2.5;
+  opacity: 50%;
+  rotate: -25deg;
 }
 
 .vazio p {
   margin-top: 10px;
+  opacity: 50%;
   font-size: 1.1rem;
   color: var(--secondary);
 }
