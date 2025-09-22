@@ -1,4 +1,4 @@
-/* Variáveis de cores */
+/* ==================== VARIÁVEIS DE CORES ==================== */
 :root {
   --text: #eae9fc;
   --background: #010104;
@@ -6,9 +6,11 @@
   --secondary: #daa7f6;
   --accent: #ff8400;
   --line: #535353;
+  --card-bg: #111;
+  --card-shadow: rgba(0,0,0,0.5);
 }
 
-/* Reset básico */
+/* ==================== RESET BÁSICO ==================== */
 * {
   margin: 0;
   padding: 0;
@@ -22,7 +24,7 @@ body {
   min-height: 100vh;
 }
 
-/* NAVBAR */
+/* ==================== NAVBAR ==================== */
 .navbar {
   display: flex;
   align-items: center;
@@ -59,43 +61,105 @@ body {
   color: var(--secondary);
 }
 
-/* CONTEÚDO */
+/* ==================== CONTEÚDO ==================== */
 main {
   padding: 20px;
-  text-align: center;
 }
 
 h1 {
-  margin-bottom: 20px;
-  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 2.2rem;
   color: var(--primary);
 }
 
-/* ÁREA DE CURRÍCULOS */
-.curriculos-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.vazio {
+.intro {
   text-align: center;
-  margin-top: 50px;
-}
-
-.vazio img.abelha {
-  width: 120px;
-  opacity: 0.8;
-}
-
-.vazio p {
-  margin-top: 10px;
+  margin-bottom: 30px;
   font-size: 1.1rem;
   color: var(--secondary);
 }
 
-/* BOTÃO FLUTUANTE */
+/* ==================== CATEGORIAS ==================== */
+.categoria {
+  margin-bottom: 40px;
+}
+
+.categoria h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: var(--secondary);
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 5px;
+}
+
+/* ==================== CARDS ==================== */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 20px;
+  width: 280px;
+  color: var(--text);
+  text-align: left;
+  box-shadow: 0 4px 12px var(--card-shadow);
+  transition: 0.3s;
+  position: relative;
+}
+
+.card:hover {
+  border-color: var(--secondary);
+  transform: scale(1.03);
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+
+.card p {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  background: var(--primary);
+  color: #000;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: var(--accent);
+}
+
+/* ==================== RESPONSIVIDADE ==================== */
+@media screen and (max-width: 1024px) {
+  .card {
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    width: 90%;
+  }
+}
+
+/* ==================== BOTÃO FLUTUANTE ==================== */
 .botao-flutuante {
   position: fixed;
   bottom: 25px;
@@ -117,9 +181,9 @@ h1 {
   transform: scale(1.1);
 }
 
-/* MODAL */
+/* ==================== MODAL ==================== */
 .modal {
-  display: none; /* fica escondido até abrir */
+  display: none; /* escondido até abrir */
   position: fixed;
   top: 0;
   left: 0;
@@ -128,6 +192,7 @@ h1 {
   background: rgba(0,0,0,0.8);
   align-items: center;
   justify-content: center;
+  z-index: 1000;
 }
 
 .modal-content {
@@ -136,6 +201,8 @@ h1 {
   border-radius: 12px;
   width: 400px;
   max-width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
   box-shadow: 0 0 10px var(--secondary);
   color: var(--text);
   text-align: left;
@@ -168,14 +235,6 @@ h1 {
   gap: 10px;
 }
 
-.btn {
-  padding: 8px 14px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
 .btn.salvar {
   background: var(--primary);
   color: #000;
@@ -192,86 +251,4 @@ h1 {
 
 .btn.cancelar:hover {
   background: #666;
-}
-/* CARDS DE CURRÍCULO */
-.card {
-  background: #111;
-  border: 2px solid transparent;
-  border-radius: 12px;
-  padding: 15px;
-  width: 280px;
-  color: var(--text);
-  text-align: left;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  transition: 0.3s;
-  position: relative;
-}
-
-.card:hover {
-  border-color: var(--secondary);
-  transform: scale(1.02);
-}
-
-.card img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
-}
-
-.card-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.card-header h3 {
-  font-size: 1.2rem;
-  margin: 0;
-  color: var(--text);
-}
-
-.card-header span {
-  font-size: 0.9rem;
-  color: var(--secondary);
-}
-
-.card-info {
-  font-size: 0.9rem;
-  margin-top: 8px;
-}
-
-.card-info strong {
-  color: var(--secondary);
-}
-
-.toggle-btn {
-  text-align: center;
-  margin-top: 8px;
-  cursor: pointer;
-  font-size: 1.2rem;
-  color: var(--primary);
-}
-
-.card.expandido {
-  width: 320px;
-}
-
-.card.expandido .extra {
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: var(--text);
-}
-
-.edit-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: var(--accent);
-  border: none;
-  padding: 6px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
 }

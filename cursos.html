@@ -1,29 +1,171 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Beelder - Cursos</title>
-    <link rel="stylesheet" href="styles-cursos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beelder - Cursos Gratuitos</title>
+  <link rel="stylesheet" href="styles-cursos.css">
 </head>
 <body>
-    <!-- Barra de navegação -->
-    <nav class="navbar">
-        <div class="logo">
-            <img src="abelha.png" alt="Logo" class="logo-img">
-        </div>
-        <ul class="menu">
-            <li><a href="index.html">Início</a></li>
-            <li><a class="ativo" href="cursos.html">Cursos</a></li>
-            <li><a href="dicas.html">Dicas</a></li>
-        </ul>
-    </nav>
-
-    <h1>Cursos Gratuitos</h1>
-    <ul>
-        <li><a href="https://www.coursera.org/" target="_blank">Coursera</a></li>
-        <li><a href="https://www.edx.org/" target="_blank">edX</a></li>
-        <li><a href="https://www.khanacademy.org/" target="_blank">Khan Academy</a></li>
-        <li><a href="https://br.udemy.com/courses/free/" target="_blank">Udemy Gratuita</a></li>
+  <!-- Barra de navegação -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="abelha.png" alt="Logo" class="logo-img">
+    </div>
+    <ul class="menu">
+      <li><a href="index.html">Início</a></li>
+      <li><a class="ativo" href="cursos.html">Cursos</a></li>
+      <li><a href="dicas.html">Dicas</a></li>
     </ul>
+  </nav>
+
+  <main>
+    <h1>Cursos Gratuitos</h1>
+    <p class="intro">Explore centenas de cursos gratuitos organizados por áreas. Todos os cursos são totalmente gratuitos e online, perfeitos para aprimorar suas habilidades e impulsionar sua carreira!</p>
+
+    <section class="cursos-container">
+
+      <!-- Programação e Tecnologia -->
+      <div class="categoria">
+        <h2>💻 Programação e Tecnologia</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Coursera</h3>
+            <p>Universidades renomadas com cursos gratuitos em programação, ciência de dados, IA e muito mais.</p>
+            <a href="https://www.coursera.org/courses?query=free" target="_blank" class="btn">Acessar</a>
+          </div>
+          <div class="card">
+            <h3>edX</h3>
+            <p>Cursos gratuitos de Harvard, MIT e outras instituições em tecnologia e inovação.</p>
+            <a href="https://www.edx.org/course?price=Free" target="_blank" class="btn">Acessar</a>
+          </div>
+          <div class="card">
+            <h3>Khan Academy</h3>
+            <p>Aprenda matemática, ciência da computação e programação de forma gratuita.</p>
+            <a href="https://www.khanacademy.org/" target="_blank" class="btn">Acessar</a>
+          </div>
+          <div class="card">
+            <h3>Udemy Free</h3>
+            <p>Uma vasta coleção de cursos gratuitos em tecnologia, design e negócios.</p>
+            <a href="https://br.udemy.com/courses/free/" target="_blank" class="btn">Acessar</a>
+          </div>
+          <div class="card">
+            <h3>Eu Capacito</h3>
+            <p>Plataforma com mais de 230 cursos gratuitos em programação, dados, nuvem e IA, voltada para iniciantes e profissionais.</p>
+            <a href="https://www.eucapacito.com.br/" target="_blank" class="btn">Acessar</a>
+          </div>
+          <div class="card">
+            <h3>FreeCodeCamp</h3>
+            <p>Cursos de programação completos, com projetos práticos e certificados gratuitos.</p>
+            <a href="https://www.freecodecamp.org/" target="_blank" class="btn">Acessar</a>
+          </div>
+          <div class="card">
+            <h3>Canal Curso em Vídeo (YouTube)</h3>
+            <p>Aulas de programação em português, do básico ao avançado.</p>
+            <a href="https://www.youtube.com/c/CursoemV%C3%ADdeo" target="_blank" class="btn">Acessar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Idiomas -->
+      <div class="categoria">
+        <h2>🌍 Idiomas</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Duolingo</h3>
+            <p>Aprenda inglês, espanhol e outros idiomas de forma interativa e gratuita.</p>
+            <a href="https://www.duolingo.com/" target="_blank" class="btn">Acessar</a>
+          </div>
+          <div class="card">
+            <h3>BBC Learning English</h3>
+            <p>Aprenda inglês com vídeos, podcasts e atividades gratuitas.</p>
+            <a href="https://www.bbc.co.uk/learningenglish" target="_blank" class="btn">Acessar</a>
+          </div>
+          <div class="card">
+            <h3>Busuu</h3>
+            <p>Pratique idiomas com falantes nativos gratuitamente (plano básico).</p>
+            <a href="https://www.busuu.com/" target="_blank" class="btn">Acessar</a>
+          </div>
+          <div class="card">
+            <h3>Canal Bem poliglota (YouTube)</h3>
+            <p>Aulas de inglês, francês, espanhol e mais, totalmente grátis.</p>
+            <a href="https://www.youtube.com/@BemPoliglota/playlists" target="_blank" class="btn">Acessar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Negócios e Carreira -->
+      <div class="categoria">
+        <h2>📈 Negócios e Carreira</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Sebrae Cursos</h3>
+            <p>Empreendedorismo, gestão, marketing e finanças para pequenos negócios.</p>
+            <a href="https://www.sebrae.com.br/sites/PortalSebrae/cursosonline" target="_blank" class="btn">Acessar</a>
+          </div>
+          <div class="card">
+            <h3>FGV Online</h3>
+            <p>Cursos gratuitos em administração, economia, finanças e liderança.</p>
+            <a href="https://educacao-executiva.fgv.br/cursos/gratuitos" target="_blank" class="btn">Acessar</a>
+          </div>
+          <div class="card">
+            <h3>Canal Nerds de Negócios (YouTube)</h3>
+            <p>Dicas de carreira, empreendedorismo e gestão de negócios.</p>
+            <a href="https://www.youtube.com/@nerdsdenegocios" target="_blank" class="btn">Acessar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Criatividade -->
+      <div class="categoria">
+        <h2>🎨 Artes e Criatividade</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Anglo Cursos</h3>
+            <p>Curso gratis de design grafico</p>
+            <a href="https://anglocursos.com.br/cursos/de/artes/design-grafico/" target="_blank" class="btn">Acessar</a>
+          </div>
+          <div class="card">
+            <h3>Canva Design School</h3>
+            <p>Aprenda design gráfico de forma gratuita e fácil.</p>
+            <a href="https://www.canva.com/learn/" target="_blank" class="btn">Acessar</a>
+          </div>
+          <div class="card">
+            <h3>Drawspace</h3>
+            <p>Técnicas de desenho passo a passo totalmente gratuitas.</p>
+            <a href="https://www.drawspace.com/" target="_blank" class="btn">Acessar</a>
+          </div>
+          <div class="card">
+            <h3>Canal Ricardo Yamaguchi (YouTube)</h3>
+            <p>Desenho, pintura e técnicas artísticas gratuitas em vídeos didáticos.</p>
+            <a href="https://www.youtube.com/@RicardoYamaguchi" target="_blank" class="btn">Acessar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desenvolvimento Pessoal -->
+      <div class="categoria">
+        <h2>🧠 Desenvolvimento Pessoal</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Canal Pinho(Youtube)</h3>
+            <p>Canal YouTube gratuito com dicas sobre mindset, produtividade e foco.</p>
+            <a href="https://www.youtube.com/@Pinhotube" target="_blank" class="btn">Acessar</a>
+          </div>
+          <div class="card">
+            <h3>Coursera – Soft Skills</h3>
+            <p>Cursos gratuitos sobre habilidades interpessoais e comunicação.</p>
+            <a href="https://www.coursera.org/courses?query=soft%20skills&free=true" target="_blank" class="btn">Acessar</a>
+          </div>
+          <div class="card">
+            <h3>edX – Life Skills</h3>
+            <p>Cursos online gratuitos focados em desenvolvimento pessoal e profissional.</p>
+            <a href="https://www.edx.org/course?price=Free" target="_blank" class="btn">Acessar</a>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
 </body>
 </html>
