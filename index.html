@@ -27,32 +27,12 @@
             <div class="vazio">
                 <img src="abelha.png" alt="Abelha" class="abelha">
             </div>
-            <div class="card">
-  <button class="edit-btn">✏️</button>
-  <div class="card-header">
-    <img src="foto.png" alt="Foto">
-    <div>
-      <h3>Fulano da Silva</h3>
-      <span>22 anos</span>
-    </div>
-  </div>
-  <div class="card-info">
-    <p><strong>Excelência:</strong> Criatividade</p>
-    <p><strong>Estudando:</strong> Desenvolvimento Web</p>
-    <p><strong>Objetivo:</strong> Conseguir estágio</p>
-  </div>
-  <div class="extra" style="display: none;">
-    <p><strong>Experiência:</strong> Trabalho como suporte técnico</p>
-    <p><strong>Habilidades:</strong> HTML, CSS, JS</p>
-  </div>
-  <div class="toggle-btn">▼</div>
-</div>
-
         </div>
     </main>
 
     <!-- Botão flutuante de adicionar -->
     <button id="novoCurriculo" class="botao-flutuante">+</button>
+
     <!-- Modal -->
     <div id="modal" class="modal">
         <div class="modal-content">
@@ -60,11 +40,17 @@
             <form id="formCurriculo">
                 <input type="hidden" id="curriculoId">
 
-                <label>Foto (URL):<br><input type="text" id="foto"></label><br>
-                <label>Nome:<br><input type="text" id="nome" required></label><br>
-                <label>Idade:<br><input type="number" id="idade"></label><br>
+                <!-- Foto com upload -->
+                <label>Foto(JPG, jpeg, PNG, WebP):<br>
+                    <input type="file" id="foto" accept="image/*">
+                    <br>
+                    <img id="previewFoto" src="" alt="Preview" style="max-width:100px; margin-top:5px; display:none;">
+                </label><br>
+
+                <label>Nome:<br><input type="text" id="nome" minlength="3" required></label><br>
+                <label>Idade:<br><input type="number" id="idade" minlength="1" min="1" max="120"></label><br>
                 <label>Email:<br><input type="email" id="email"></label><br>
-                <label>Telefone:<br><input type="text" id="telefone"></label><br>
+                <label>Telefone:<br><input type="tel" id="telefone" pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}" required></label><br>
                 <label>Excelência:<br><input type="text" id="excelencia"></label><br>
                 <label>Estudando:<br><input type="text" id="estudando"></label><br>
                 <label>Objetivo:<br><textarea id="objetivo"></textarea></label><br>
