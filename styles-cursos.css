@@ -252,3 +252,42 @@ h1 {
 .btn.cancelar:hover {
   background: #666;
 }
+/* ===== RESPONSIVIDADE EXTRA ===== */
+@media (max-width: 768px) {
+  /* Navbar */
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+  }
+
+  .menu {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .menu li a {
+    font-size: 1rem;
+    display: block;
+    padding: 8px 0;
+  }
+
+  /* Conteúdo */
+  main {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .intro {
+    font-size: 1rem;
+  }
+
+  .categoria h2 {
+    font-size: 1.4rem;
+  }
+}
