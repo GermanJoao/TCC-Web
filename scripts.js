@@ -151,69 +151,119 @@ document.addEventListener("DOMContentLoaded", () => {
         carregarCurriculos();
     };
 
-// ===== EXPORTAR PDF BÁSICO E PROFISSIONAL =====
+// ===== EXPORTAR PDF ESTILO PROFISSIONAL DARK MODE =====
 window.exportarPDF = function (id) {
     const curriculos = JSON.parse(localStorage.getItem("curriculos") || "[]");
     const c = curriculos[id];
-    const doc = new jsPDF();
+    const doc = new jsPDF("p", "mm", "a4");
 
-    // ===== NOME NO TOPO =====
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(20);
-    doc.setTextColor(0, 0, 0);
-    doc.text(c.nome || "Nome", 105, 20, { align: "center" });
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const margin = 20;
+    let y = 70; // começa abaixo do espaço reservado pra foto
 
-    // ===== FOTO =====
-    if (c.foto) {
-        doc.addImage(c.foto, "PNG", 160, 10, 40, 40);
-        // borda circular simples
-        doc.setDrawColor(100, 100, 100);
-        doc.setLineWidth(0.8);
-        doc.circle(180, 30, 20, "S");
-    }
+    // ===== FUNÇÃO AUXILIAR PARA SEÇÕES =====
+    function addSection(titulo, conteudo) {
+        if (!conteudo) return;
 
-    // ===== INFORMAÇÕES DE CONTATO =====
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(12);
-    let y = 40;
-    if (c.idade) doc.text(`Idade: ${c.idade} anos`, 10, y);
-    if (c.email) { y += 7; doc.text(`Email: ${c.email}`, 10, y); }
-    if (c.telefone) { y += 7; doc.text(`Telefone: ${c.telefone}`, 10, y); }
-
-    // ===== LINHA DIVISÓRIA =====
-    y += 10;
-    doc.setDrawColor(150, 150, 150);
-    doc.setLineWidth(0.5);
-    doc.line(10, y, 200, y);
-    y += 10;
-
-    // ===== SEÇÕES =====
-    const campos = [
-        { label: "Objetivo", value: c.objetivo },
-        { label: "Experiência", value: c.experiencia },
-        { label: "Habilidades", value: c.habilidades },
-        { label: "Estudos", value: c.estudando },
-        { label: "Destaques", value: c.excelencia },
-    ];
-
-    campos.forEach(campo => {
-        if (!campo.value) return;
-
-        // título da seção
         doc.setFont("helvetica", "bold");
-        doc.setFontSize(12);
-        doc.text(campo.label, 10, y);
+        doc.setFontSize(14);
+        doc.setTextColor("#daa7f6"); // secondary
+        doc.text(titulo, margin, y);
+        y += 6;
 
-        // conteúdo da seção
+        doc.setDrawColor("#daa7f6"); // secondary
+        doc.setLineWidth(0.8);
+        doc.line(margin, y, pageWidth - margin, y);
+        y += 8;
+
         doc.setFont("helvetica", "normal");
         doc.setFontSize(11);
-        const linhas = doc.splitTextToSize(campo.value, 190);
-        doc.text(linhas, 10, y + 6);
-        y += linhas.length * 6 + 10;
-    });
+        doc.setTextColor("#eae9fc"); // text
 
-    // ===== SALVAR PDF =====
-    doc.save(`${c.nome || "curriculo"}_curriculo.pdf`);
+        const linhas = doc.splitTextToSize(conteudo, pageWidth - 2 * margin);
+        doc.text(linhas, margin, y);
+        y += linhas.length * 6 + 12;
+    }
+
+    // ===== FUNDO ESCURO =====
+    doc.setFillColor("#010104"); // fundo dark
+    doc.rect(0, 0, pageWidth, pageHeight, "F");
+
+    // ===== FOTO (RECORTE CIRCULAR) =====
+    const fotoSize = 50; // tamanho da foto em mm
+    if (c.foto) {
+        const img = new Image();
+        img.src = c.foto;
+        img.onload = function () {
+            const canvasSize = 300; // resolução maior pra evitar pixelização
+            const canvas = document.createElement("canvas");
+            canvas.width = canvasSize;
+            canvas.height = canvasSize;
+            const ctx = canvas.getContext("2d");
+
+            // recorte circular
+            ctx.beginPath();
+            ctx.arc(canvasSize / 2, canvasSize / 2, canvasSize / 2, 0, Math.PI * 2, true);
+            ctx.closePath();
+            ctx.clip();
+
+            ctx.drawImage(img, 0, 0, canvasSize, canvasSize);
+
+            const circularImg = canvas.toDataURL("image/png");
+
+            // adiciona no PDF no topo
+            doc.addImage(circularImg, "PNG", pageWidth / 2 - fotoSize / 2, 10, fotoSize, fotoSize);
+
+            // ajusta y inicial do texto abaixo da foto
+            y = 10 + fotoSize + 15;
+
+            adicionarConteudoEExportar();
+        };
+    } else {
+        adicionarConteudoEExportar();
+    }
+
+    function adicionarConteudoEExportar() {
+        // ===== NOME =====
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(22);
+        doc.setTextColor("#ffbb00"); // primary
+        const nomeQuebrado = doc.splitTextToSize(c.nome || "Seu Nome Completo", pageWidth - 2 * margin);
+        doc.text(nomeQuebrado, pageWidth / 2, y, { align: "center" });
+        y += nomeQuebrado.length * 8;
+
+        // ===== CONTATO =====
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(10);
+        doc.setTextColor("#eae9fc"); // text
+        let contatos = [];
+        if (c.email) contatos.push(`Email: ${c.email}`);
+        if (c.telefone) contatos.push(`Tel: ${c.telefone}`);
+        if (c.idade) contatos.push(`${c.idade} anos`);
+        if (c.local) contatos.push(c.local);
+
+        if (contatos.length > 0) {
+            const contatosQuebrados = doc.splitTextToSize(contatos.join("  |  "), pageWidth - 2 * margin);
+            doc.text(contatosQuebrados, pageWidth / 2, y, { align: "center" });
+            y += contatosQuebrados.length * 6 + 5;
+
+            doc.setDrawColor("#ff8400"); // accent
+            doc.setLineWidth(0.5);
+            doc.line(margin, y, pageWidth - margin, y);
+            y += 15;
+        }
+
+        // ===== SEÇÕES =====
+        addSection("Objetivo", c.objetivo);
+        addSection("Experiência", c.experiencia);
+        addSection("Estudando", c.formacao || c.estudando);
+        addSection("Habilidades", c.habilidades);
+        addSection("Destaques", c.excelencia);
+
+        // ===== SALVAR PDF =====
+        doc.save(`${c.nome || "curriculo"}_curriculo.pdf`);
+    }
 };
 
     carregarCurriculos();
